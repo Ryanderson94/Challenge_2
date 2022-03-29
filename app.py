@@ -9,12 +9,12 @@ Example:
 import sys
 import fire
 import questionary
-import csv
 from pathlib import Path
 
 from sympy import true
 
 from qualifier.utils.fileio import load_csv
+from qualifier.utils.fileio import save_csv
 
 from qualifier.utils.calculators import (
     calculate_monthly_debt_ratio,
@@ -113,25 +113,32 @@ def save_qualifying_loans(qualifying_loans):
     """
     # @TODO: Complete the usability dialog for savings the CSV Files.
     # YOUR CODE HERE!
+    # Determine the number of loans in the list
+    count_qualifying_loans = len(qualifying_loans)
 
     # Prompt to confirm if user would like to save their list of loans
     confirm_csv_save = questionary.confirm("Would you like to save your list of qualified loans?").ask()
 
     # INSERT COMMENT
     if confirm_csv_save == True:
+        if count_qualifying_loans > 0:
             save_csvpath = questionary.text("Where would you like to save this file?").ask()
             save_csvpath = Path(save_csvpath)
             if not save_csvpath.exists():
                 sys.exit(f"Oops! This is an invalid file location: {save_csvpath}")
+        else:
+            sys.exit("Sorry! You do not qualify for any loans.")
     else:
         print("You have opted out of saving the file.")
     
-    return save_csvpath
+    return save_csv(save_csvpath)
 
-def save_csv(confirm_csv_save):
+"""
+Moved this seciond to the fileio.py file since it seemed to make more sense there.
+def save_csv(save_csvpath):
     header = ["Lender", "Max Loan Amount" , "Max LTV", "Max DTI", "Min Credit Score", "Interest Rate"]
     
-    with open(Path("insert path here"), 'w', newline='') as csvfile:
+    with open(Path(save_csvpath), 'w', newline='') as csvfile:
         # Create csv writer
         csvwriter = csv.writer(csvfile, delimiter=",")
 
@@ -140,7 +147,7 @@ def save_csv(confirm_csv_save):
 
         # Write values of each loan inside qualifying loans as row in the csv file
         for item in qualifying_loans:
-            csvwriter.writerow(item.values())
+            csvwriter.writerow(item.values())"""
 
 
 def run():
