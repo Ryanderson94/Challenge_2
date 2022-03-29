@@ -9,6 +9,7 @@ Example:
 import sys
 import fire
 import questionary
+import csv
 from pathlib import Path
 
 from qualifier.utils.fileio import load_csv
@@ -110,6 +111,20 @@ def save_qualifying_loans(qualifying_loans):
     """
     # @TODO: Complete the usability dialog for savings the CSV Files.
     # YOUR CODE HERE!
+    
+    # Set the output header
+    header = ["Lender", "Max Loan Amount" , "Max LTV", "Max DTI", "Min Credit Score", "Interest Rate"]
+    
+    with open(Path("insert path here"), 'w', newline='') as csvfile:
+        # Create csv writer
+        csvwriter = csv.writer(csvfile, delimiter=",")
+
+        # Write header to csv file
+        csvwriter.writerow(header)
+
+        # Write values of each loan inside qualifying loans as row in the csv file
+        for item in qualifying_loans:
+            csvwriter.writerow(item.values())
 
 
 def run():
