@@ -12,6 +12,8 @@ import questionary
 import csv
 from pathlib import Path
 
+from sympy import true
+
 from qualifier.utils.fileio import load_csv
 
 from qualifier.utils.calculators import (
@@ -111,8 +113,22 @@ def save_qualifying_loans(qualifying_loans):
     """
     # @TODO: Complete the usability dialog for savings the CSV Files.
     # YOUR CODE HERE!
+
+    # Prompt to confirm if user would like to save their list of loans
+    confirm_csv_save = questionary.confirm("Would you like to save your list of qualified loans?").ask()
+
+    # INSERT COMMENT
+    if confirm_csv_save == True:
+            save_csvpath = questionary.text("Where would you like to save this file?").ask()
+            save_csvpath = Path(save_csvpath)
+            if not save_csvpath.exists():
+                sys.exit(f"Oops! This is an invalid file location: {save_csvpath}")
+    else:
+        print("You have opted out of saving the file.")
     
-    # Set the output header
+    return save_csvpath
+
+def save_csv(confirm_csv_save):
     header = ["Lender", "Max Loan Amount" , "Max LTV", "Max DTI", "Min Credit Score", "Interest Rate"]
     
     with open(Path("insert path here"), 'w', newline='') as csvfile:
