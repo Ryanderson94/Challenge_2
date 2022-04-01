@@ -29,6 +29,7 @@ def load_csv(csvpath):
         for row in csvreader:
             data.append(row)
     return data
+    
 
 def save_csv(save_csvpath, qualifying_loans):
     header = ["Lender", "Max Loan Amount" , "Max LTV", "Max DTI", "Min Credit Score", "Interest Rate"]
@@ -41,5 +42,5 @@ def save_csv(save_csvpath, qualifying_loans):
         csvwriter.writerow(header)
 
         # Write values of each loan inside qualifying loans as row in the csv file
-        for item in qualifying_loans:
-            csvwriter.writerow(item.values())
+        for row in qualifying_loans:
+            csvwriter.writerow(row)

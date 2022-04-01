@@ -115,23 +115,19 @@ def save_qualifying_loans(qualifying_loans):
     # YOUR CODE HERE!
     # Determine the number of loans in the list
     count_qualifying_loans = len(qualifying_loans)
-
-    # Prompt to confirm if user would like to save their list of loans
-    confirm_csv_save = questionary.confirm("Would you like to save your list of qualified loans?").ask()
-
-    # INSERT COMMENT
-    if confirm_csv_save == True:
-        if count_qualifying_loans > 0:
-            save_csvpath = questionary.text("Where would you like to save this file?").ask()
-            save_csvpath = Path(save_csvpath)
-            if not save_csvpath.exists():
-                sys.exit(f"Oops! This is an invalid file location: {save_csvpath}")
-        else:
-            sys.exit("Sorry! You do not qualify for any loans.")
-    else:
-        print("You have opted out of saving the file.")
     
-    return save_csv(save_csvpath)
+    if count_qualifying_loans > 0:
+           # Prompt to confirm if user would like to save their list of loans
+       confirm_csv_save = questionary.confirm("Would you like to save your list of qualified loans?").ask()
+       if confirm_csv_save == True:
+           save_csvpath = questionary.text("Where would you like to save this file?").ask()
+           save_csvpath = Path(save_csvpath)
+       else:
+            print("You have opted out of saving the file.")
+    else:
+        sys.exit("Sorry! You do not qualify for any loans.")
+    # btw save csv requires a qualiying_loans
+    return save_csv(save_csvpath, qualifying_loans)   
 
 """
 Moved this seciond to the fileio.py file since it seemed to make more sense there.
