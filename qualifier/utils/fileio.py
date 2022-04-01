@@ -30,7 +30,7 @@ def load_csv(csvpath):
             data.append(row)
     return data
     
-
+# Function to save csv
 def save_csv(save_csvpath, qualifying_loans):
     header = ["Lender", "Max Loan Amount" , "Max LTV", "Max DTI", "Min Credit Score", "Interest Rate"]
     

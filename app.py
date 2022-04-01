@@ -6,6 +6,8 @@ This is a command line application to match applicants with qualifying loans.
 Example:
     $ python app.py
 """
+
+# Import required libraries
 import sys
 import fire
 import questionary
@@ -26,48 +28,43 @@ from qualifier.filters.credit_score import filter_credit_score
 from qualifier.filters.debt_to_income import filter_debt_to_income
 from qualifier.filters.loan_to_value import filter_loan_to_value
 
-
+# Function to load bank data from csv of a users choosing
 def load_bank_data():
-    """Ask for the file path to the latest banking data and load the CSV file.
 
-    Returns:
-        The bank data from the data rate sheet CSV file.
-    """
-
+    # Prompt for csv
     csvpath = questionary.text("Enter a file path to a rate-sheet (.csv):").ask()
     csvpath = Path(csvpath)
+    # Check that the file entered by user exists and the path is correct
     if not csvpath.exists():
         sys.exit(f"Oops! Can't find this path: {csvpath}")
 
+    # Return bank data from sheet selected by user
     return load_csv(csvpath)
 
-
+# Function to obtain credit, monthly debt, monthly income, desired loan amount and home value from applicant 
 def get_applicant_info():
-    """Prompt dialog to get the applicant's financial information.
 
-    Returns:
-        Returns the applicant's financial information.
-    """
-
+    # Prompts for obtaining applicant information
     credit_score = questionary.text("What's your credit score?").ask()
     debt = questionary.text("What's your current amount of monthly debt?").ask()
     income = questionary.text("What's your total monthly income?").ask()
     loan_amount = questionary.text("What's your desired loan amount?").ask()
     home_value = questionary.text("What's your home value?").ask()
 
+    # Set variables with information input by applicant
     credit_score = int(credit_score)
     debt = float(debt)
     income = float(income)
     loan_amount = float(loan_amount)
     home_value = float(home_value)
 
+    # Return financial information input by the applicant
     return credit_score, debt, income, loan_amount, home_value
 
 
+# Function to determine for which loans the applicant is qualified based on financial information provided
 def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_value):
-    """Determine which loans the user qualifies for.
-
-    Loan qualification criteria is based on:
+    """Loan qualification criteria is based on:
         - Credit Score
         - Loan Size
         - Debit to Income ratio (calculated)
@@ -80,10 +77,6 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
         income (float): The applicant's total monthly income.
         loan (float): The total loan amount applied for.
         home_value (float): The estimated home value.
-
-    Returns:
-        A list of the banks willing to underwrite the loan.
-
     """
 
     # Calculate the monthly debt ratio
@@ -100,50 +93,40 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
     bank_data_filtered = filter_debt_to_income(monthly_debt_ratio, bank_data_filtered)
     bank_data_filtered = filter_loan_to_value(loan_to_value_ratio, bank_data_filtered)
 
+    # Indicate the number of loans for which the applicant is qualified
     print(f"Found {len(bank_data_filtered)} qualifying loans")
 
+    # Return list of banks willing to underwrite the applicant's loan
     return bank_data_filtered
 
 
+# Function to allow applicant to save qualified loans to a csv file
 def save_qualifying_loans(qualifying_loans):
     """Saves the qualifying loans to a CSV file.
 
     Args:
         qualifying_loans (list of lists): The qualifying bank loans.
     """
-    # @TODO: Complete the usability dialog for savings the CSV Files.
-    # YOUR CODE HERE!
     # Determine the number of loans in the list
     count_qualifying_loans = len(qualifying_loans)
     
+    # Determine if applicant is qualified for any loans. If the number of loans for which they are qualified is zero, indicate they have not qualified for any and exit.
     if count_qualifying_loans > 0:
-           # Prompt to confirm if user would like to save their list of loans
+
+       # Prompt to confirm if user would like to save their list of loans
        confirm_csv_save = questionary.confirm("Would you like to save your list of qualified loans?").ask()
        if confirm_csv_save == True:
+           
+           # Prompt user to indicate where they would like to save the loan
            save_csvpath = questionary.text("Where would you like to save this file?").ask()
            save_csvpath = Path(save_csvpath)
        else:
             print("You have opted out of saving the file.")
     else:
         sys.exit("Sorry! You do not qualify for any loans.")
-    # btw save csv requires a qualiying_loans
-    return save_csv(save_csvpath, qualifying_loans)   
-
-"""
-Moved this seciond to the fileio.py file since it seemed to make more sense there.
-def save_csv(save_csvpath):
-    header = ["Lender", "Max Loan Amount" , "Max LTV", "Max DTI", "Min Credit Score", "Interest Rate"]
     
-    with open(Path(save_csvpath), 'w', newline='') as csvfile:
-        # Create csv writer
-        csvwriter = csv.writer(csvfile, delimiter=",")
-
-        # Write header to csv file
-        csvwriter.writerow(header)
-
-        # Write values of each loan inside qualifying loans as row in the csv file
-        for item in qualifying_loans:
-            csvwriter.writerow(item.values())"""
+    # Pass 'qualifying_loan' list and 'save_csvpath' into the 'save_csv' function
+    return save_csv(save_csvpath, qualifying_loans)   
 
 
 def run():
