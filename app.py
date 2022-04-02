@@ -12,6 +12,7 @@ import sys
 import fire
 import questionary
 from pathlib import Path
+import os
 
 from sympy import true
 
@@ -119,15 +120,21 @@ def save_qualifying_loans(qualifying_loans):
            
            # Prompt user to indicate where they would like to save the loan
            save_csvpath = questionary.text("Where would you like to save this file?").ask()
-           save_csvpath = Path(save_csvpath)
-       else:
-            print("You have opted out of saving the file.")
+           
+           # Check if directory exists. If yes, add file to existing directory, if no, create directory and add file. 
+           if os.path.isdir(os.path.dirname(save_csvpath)):
+              save_csvpath = Path(save_csvpath)
+           else:
+               os.mkdir(os.path.dirname(save_csvpath))
+               save_csvpath = Path(save_csvpath)
     else:
         sys.exit("Sorry! You do not qualify for any loans.")
     
+    header = ["Lender", "Max Loan Amount" , "Max LTV", "Max DTI", "Min Credit Score", "Interest Rate"]
+    
     # Pass 'qualifying_loan' list and 'save_csvpath' into the 'save_csv' function
-    return save_csv(save_csvpath, qualifying_loans)   
-
+    return save_csv(save_csvpath, qualifying_loans, header)   
+ 
 
 def run():
     """The main function for running the script."""

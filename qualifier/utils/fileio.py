@@ -31,8 +31,7 @@ def load_csv(csvpath):
     return data
     
 # Function to save csv
-def save_csv(save_csvpath, qualifying_loans):
-    header = ["Lender", "Max Loan Amount" , "Max LTV", "Max DTI", "Min Credit Score", "Interest Rate"]
+def save_csv(save_csvpath, qualifying_loans, header):
     
     with open(Path(save_csvpath), 'w', newline='') as csvfile:
         # Create csv writer

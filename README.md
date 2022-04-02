@@ -8,17 +8,20 @@ Applying for a loan can be an arduous and time consuming process. This automated
 
 Describe the technologies required to use your project such as programming languages, libraries, frameworks, and operating systems. Be sure to include the specific versions of any critical dependencies that you have used in the stable version of your project.
 
+This project leverages python 3.7+
+
+
+
 This program runs on Python and uses the following libraries:
-System
-Fire
-Questionary
-Pathlib
+run pip install -r requirements.txt
 
 ---
 
 ## Installation Guide
 
 In this section, you should include detailed installation notes containing code blocks and screenshots.
+1. GIT Copy
+2. Install 
 
 ---
 
