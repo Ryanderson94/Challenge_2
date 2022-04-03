@@ -1,0 +1,50 @@
+  452  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  453  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  454  pip list --format=freeze > requirements.txt
+  455  git status
+  456  git add .gitignore README.md app.py qualifier/utils/fileio.py 
+  457  git add requirements.txt 
+  458  git remove .DS_Store 
+  459  git rm .DS_Store 
+  460  git status
+  461  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  462  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  463  source /opt/anaconda3/bin/activate
+  464  conda activate dev
+  465  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  466  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  467  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  468  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  469  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  470  source /opt/anaconda3/bin/activate
+  471  conda activate dev
+  472  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  473  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  474  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  475  source /opt/anaconda3/bin/activate
+  476  conda activate dev
+  477  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  478  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  479  /opt/anaconda3/envs/dev/bin/python /Users/Ryanderson/Desktop/FintechBootcamp/ChallengeFiles/Challenges/Challenge_2/app.py
+  480  git status
+  481  git add app.py 
+  482  git status
+  483  git add app.py 
+  484  git commit -m "Updated app.py to account for directory creation"
+  485  git push
+  486  code .
+  487  git status
+  488  git add README.md 
+  489  git commit -m "Updated README.md"
+  490  git push
+  491  clear
+  492  python app.py
+  493  clear
+  494  conda activate dev
+  495  clear
+  496  python app.py
+  497  clear
+  498  conda activate dev
+  499  clear
+  500  python app.py
+  501  history 50 > terminal_history.txt
